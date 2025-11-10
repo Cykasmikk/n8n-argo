@@ -1,0 +1,26 @@
+﻿apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: n8n-db-cnpg-v1
+spec:
+  imageName: quay.io/enterprisedb/postgresql:16.1
+  instances: 3
+  storage:
+    size: 5Gi
+  bootstrap:
+    initdb:
+      database: n8n
+      owner: n8n
+      secret:
+        name: n8n-db-creds
+  backup:
+    barmanObjectStore:
+      destinationPath: https://<yourblob>.blob.core.windows.net/n8n-db
+      azureCredentials:
+        storageAccount:
+          name: n8n-db-storage
+          key: container-name
+        storageSasToken:
+          name: n8n-db-storage
+          key: blob-sas
+    retentionPolicy: 14d

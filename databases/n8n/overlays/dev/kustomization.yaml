@@ -1,0 +1,6 @@
+﻿namespace: cnpg-dev
+
+resources:
+  - ../../base
+  - secrets.yaml
+  - scheduled-backup.yaml

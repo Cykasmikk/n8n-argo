@@ -1,0 +1,27 @@
+﻿apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: databases
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/your-org/homelab-gitops.git
+        revision: main
+        directories:
+          - path: databases/*/overlays/*
+  template:
+    metadata:
+      name: '{{path[1]}}-db-{{path[3]}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/your-org/homelab-gitops.git
+        targetRevision: main
+        path: 'databases/{{path[1]}}/overlays/{{path[3]}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'cnpg-{{path[3]}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
