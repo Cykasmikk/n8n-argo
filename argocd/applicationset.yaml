@@ -5,7 +5,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/your-org/homelab-gitops.git
+        repoURL: https://github.com/Cykasmikk/n8n-argo.git
         revision: main
         directories:
           - path: apps/*/overlays/*
@@ -15,7 +15,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/your-org/homelab-gitops.git
+        repoURL: https://github.com/Cykasmikk/n8n-argo.git
         targetRevision: main
         path: 'apps/{{path[1]}}/overlays/{{path[3]}}'
       destination:
